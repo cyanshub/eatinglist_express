@@ -9,6 +9,10 @@ app.engine('handlebars', exphbs({'defaultLayout':'main'})   )
 app.set('view engine','handlebars')
 
 
+// 載入外部JSON檔案: 餐廳清單
+const restaurant = require('./restaurant.json')
+
+
 
 // 載入靜態檔案
 app.use(express.static('public'))
@@ -17,7 +21,7 @@ app.use(express.static('public'))
 
 // 設定路由: 首頁
 app.get('/', (rep,res)=>{
-  // res.send(`測試 express 伺服器 成功建立`)
+  console.log(restaurant.results[0])
   res.render('index')
 })
 
