@@ -10,7 +10,7 @@ app.set('view engine','handlebars')
 
 
 // 載入外部JSON檔案: 餐廳清單
-const restaurant = require('./restaurant.json')
+const restaurants = require('./restaurant.json')
 
 
 
@@ -20,8 +20,12 @@ app.use(express.static('public'))
 
 // 設定路由: 首頁(使用 index.handlebars)
 app.get('/', (rep,res)=>{
-  console.log(restaurant.results[0])
-  res.render('index')
+  console.log(restaurants.results[0])
+
+  // 測試餐廳變數
+  const restaurant = restaurants.results[0]
+
+  res.render('index', {restaurant:restaurant} )
 })
 
 

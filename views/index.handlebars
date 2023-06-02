@@ -22,6 +22,31 @@
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="row row-cols-sm-3">
+
+        {{!-- 使用 Each 迴圈動態顯示餐廳資料 --}}
+        {{!-- 先確認可成功從app.js傳入變數 --}}
+        <a href="/restaurants/{{restaurant.id}}" class="text-secondary">
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{restaurant.image}}"
+              alt="{{restaurant.name}}">
+            <div class="card-body p-3">
+              <h6 class="card-title mb-1">{{restaurant.name}}</h6>
+        
+              <div class="restaurant-category mb-1">
+                <i class="fas fa-utensils pr-2"></i> {{restaurant.category}}
+              </div>
+        
+              <span class="badge badge-pill badge-danger font-weight-normal">
+                {{restaurant.rating}}
+                <i class="fas fa-star fa-xs"></i>
+              </span>
+        
+            </div>
+          </div>
+        </a>
+
+
+
         <a href="/restaurants/1" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg"
@@ -41,6 +66,9 @@
             </div>
           </div>
         </a>
+
+
+
         <a href="/restaurants/2" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5628/02.jpg"
