@@ -22,10 +22,8 @@ app.use(express.static('public'))
 app.get('/', (rep,res)=>{
   console.log(restaurants.results[0])
 
-  // 測試餐廳變數
-  const restaurant = restaurants.results[0]
-
-  res.render('index', {restaurant:restaurant} )
+  // 將外部JSON檔案: 餐廳清單傳入局部頁面引擎
+  res.render('index', {restaurants:restaurants.results} )
 })
 
 
