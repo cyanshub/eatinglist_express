@@ -18,12 +18,20 @@ const restaurant = require('./restaurant.json')
 app.use(express.static('public'))
 
 
-
-// 設定路由: 首頁
+// 設定路由: 首頁(使用 index.handlebars)
 app.get('/', (rep,res)=>{
   console.log(restaurant.results[0])
   res.render('index')
 })
+
+
+// 設定路由: 分頁呈現個別餐廳(使用 show.handlebars)
+// 參考 a 元素的 href 設定路由(應用動態路由的概念)
+app.get('/restaurants/:restaurant_id', (req,res)=>{
+  console.log('restaurant_id: ',req.params.restaurant_id)  
+  res.render('show')
+})
+
 
 
 // 啟動並監聽伺服器
