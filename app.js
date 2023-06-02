@@ -10,6 +10,9 @@ app.set('view engine','handlebars')
 
 
 
+// 載入靜態檔案
+app.use(express.static('public'))
+
 
 
 // 設定路由: 首頁
