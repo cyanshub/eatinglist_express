@@ -8,7 +8,6 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({'defaultLayout':'main'})   )
 app.set('view engine','handlebars')
 
-
 // 載入外部JSON檔案: 餐廳清單
 const restaurants = require('./restaurant.json')
 
@@ -26,32 +25,19 @@ app.get('/', (req,res)=>{
 })
 
 
-
 // 設定路由: 在首頁應用 query 系統打造搜尋功能
 app.get('/search', (req,res)=>{
   console.log(req.query.keyword)
   const keyword = req.query.keyword
 
-  // 準備裝取處理結果的變數
-  const restaurants_filter = []
-
   // 依餐廳名稱篩選(使用filter陣列方法)
-  const restaurants_name = restaurants.results.filter( restaurant => restaurant.name.toLowerCase().includes( keyword.toLowerCase()))
+  const restaurants_filter = restaurants.results.filter( restaurant => 
+    restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || 
+    restaurant.category.toLowerCase().includes(keyword.toLowerCase())  
+  )
 
-  // 依餐廳分類篩選(使用filter陣列方法)
-  const restaurants_clf = restaurants.results.filter(restaurant => restaurant.category.toLowerCase().includes(keyword.toLowerCase()))
-
-  // 將 array 展開後裝入 array
-  restaurants_filter.push(...restaurants_name)
-  restaurants_filter.push(... restaurants_clf)
-  console.log(restaurants_filter)
-
-  // 利用Array.from new Set 方法取出唯一值(去掉重複)
-  const restaurants_filter_unique = Array.from(new Set(restaurants_filter) )
-
-  res.render('index', { restaurants:restaurants_filter_unique, keyword:keyword})
+  res.render('index', { restaurants:restaurants_filter, keyword:keyword})
 })
-
 
 
 // 設定路由: 分頁呈現個別餐廳(使用 show.handlebars)
@@ -66,7 +52,6 @@ app.get('/restaurants/:restaurant_id', (req,res)=>{
   // 將外部JSON檔案: 餐廳清單傳入局部頁面引擎
   res.render('show', {restaurant:restaurant})
 })
-
 
 
 // 啟動並監聽伺服器
